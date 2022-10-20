@@ -1,0 +1,11 @@
+if(data.message.insertedId)
+{
+  $(".toast").toast('show');
+  $(".toast").addClass("animate__animated animate__slideInRight");
+  $(".toast-body").html("Thank you ! signup success");
+}
+else{
+  $(".toast").toast('show');
+  $(".toast").addClass("animate__animated animate__slideInRight");
+  $(".toast-body").html("Oops ! internal server error");
+}
