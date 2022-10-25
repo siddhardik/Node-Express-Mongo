@@ -1,12 +1,13 @@
 window.onload = ()=>{
   signupRequest();
+  loginRequest();
+  showUser();
 }
 
 const signupRequest = ()=>{
   const form = document.querySelector("#signup-form");
   form.onsubmit = (e)=>{
     e.preventDefault();
-    // TO stay in the same page
 
     // get form data
     const formdata = JSON.stringify({
@@ -20,24 +21,18 @@ const signupRequest = ()=>{
     const ajax = new XMLHttpRequest();
     ajax.open("POST","http://localhost:8080/api/signup",true);
     ajax.send(formdata);
-    
-    // Show Loader
-    /*
-    onreadystatechange value meaning
-    0 - Currentlly Submit,Start Connection Establish 1 - Connection has been Established 2- request has been reached to server 3- server ready to give you the response 4- response has been come to your computer 
-    */
-   ajax.onreadystatechange=()=>{
 
-     if(ajax.readyState == 2){
-      $(".loader").removeClass("d-none");
-     }
-   }
-     
+    // show loader
+    ajax.onreadystatechange = ()=>{
+      if(ajax.readyState == 2)
+      {
+        $(".loader").removeClass("d-none");
+      }
+    }
 
-    // get response , When response is coming from server   
-    // ajax.onload  or if(ajax.onreadystatechange==4) both are same  
+    // get response
     ajax.onload = ()=>{
-      //Hide loader because response come
+      // hide loader
       $(".loader").addClass("d-none");
 
       const data = JSON.parse(ajax.response);
@@ -58,6 +53,44 @@ const signupRequest = ()=>{
         );
       }
     }
+  }
+}
+
+const loginRequest = ()=>{
+  const form = document.querySelector("#login-form");
+  form.onsubmit = (e)=>{
+    e.preventDefault();
+    const checkbox = document.querySelector("#remember-me");
+    const login_email = document.querySelector("#login-email").value;
+    const login_password = document.querySelector("#login-password").value;
+
+    const user = JSON.stringify({
+      username: login_email,
+      password: login_password
+    });
+
+    if(checkbox.checked)
+    {
+      localStorage.setItem("user",user);
+    }
+    else{
+
+    }
+  }
+}
+
+const showUser = ()=>{
+  if(localStorage.getItem("user") != null)
+  {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const login_email = document.querySelector("#login-email");
+    const login_password = document.querySelector("#login-password");
+    const checkbox = document.querySelector("#remember-me");
+
+    // writing data
+    login_email.value = user.username;
+    login_password.value = user.password;
+    checkbox.checked = true;
   }
 }
 
