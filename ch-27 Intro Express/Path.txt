@@ -1,0 +1,8 @@
+Create A Package.JSON File
+
+npm init
+
+Then install Express 
+
+mpm install express --save
+// --save To add it in dependecies , Now It is automatically Addd into dependencies
