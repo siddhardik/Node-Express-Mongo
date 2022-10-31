@@ -8,7 +8,7 @@ const express=require("express");
 //Return A Class , Now We need to create A Object 
 const server= new express();
 const database=require("./db.js")
-// Those codes are to be executed before giv the response , those codes are called middleware
+// Those codes are to be executed before give the response , those codes are called middleware
 server.use(jsonEncoder);
 server.use(urlEncoder);
 

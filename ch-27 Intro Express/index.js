@@ -50,7 +50,7 @@ server.get("/home",(request,response) => {
 })
 */
 /*
-Same API returns different responses According to the http METHOS GET/POST/PUT/DELETE   , But ALL returns the same response for all http requests
+Same API returns different responses According to the http METHOS GET/POST/PUT/DELETE   , But ALL http methods returns the same response for all http requests
 */
  
 
